@@ -14,10 +14,11 @@ html{scroll-behavior:smooth;overflow-x:clip}
 body{margin:0;overflow-x:clip;background:#fff;color:var(--ink);font:400 16px/1.35 "Inter Tight","Helvetica Neue",Helvetica,Arial,sans-serif;letter-spacing:-.01em;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 a:focus-visible{outline:2px solid currentColor;outline-offset:3px}
-.serif{font-family:"Times New Roman",Times,serif;letter-spacing:0}
-.nav{position:fixed;left:0;right:0;top:env(safe-area-inset-top,0px);z-index:31;display:flex;gap:clamp(14px,2.4vw,40px);padding:var(--pad) var(--pad) 0 calc(var(--pad) + 116px);color:#fff;mix-blend-mode:difference;font-weight:500;font-size:15px;line-height:1.1}
+.serif{letter-spacing:0}
+.nav{position:fixed;left:0;right:0;top:env(safe-area-inset-top,0px);z-index:31;display:flex;gap:clamp(14px,2.4vw,40px);padding:var(--pad) var(--pad) 0 calc(var(--pad) + 116px);color:#fff;font-weight:500;font-size:15px;line-height:1.1;transition:color .25s}
 .nav a:last-child{margin-left:auto}
-.brand{position:fixed;left:var(--pad);top:0;z-index:30;color:#fff;mix-blend-mode:difference;will-change:transform}
+.brand{position:fixed;left:var(--pad);top:0;z-index:30;color:#fff;transition:color .25s;will-change:transform}
+.lt .nav,.lt .brand{color:var(--ink)}
 .brand svg{display:block;width:calc(100vw - 2*var(--pad));height:auto;fill:currentColor}
 .ph{position:relative;overflow:hidden;background:#f3f3f3}
 .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
@@ -26,17 +27,25 @@ a:focus-visible{outline:2px solid currentColor;outline-offset:3px}
 .ph.empty::after{content:attr(data-l);position:absolute;left:10px;top:10px;font-size:12px;line-height:1.2;color:var(--mute)}
 .hero{position:relative;height:100svh;min-height:520px;overflow:hidden}
 .hero .ph{position:absolute;inset:-4% 0 0}
+.hero::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(to top,rgba(0,0,0,.34),transparent 42%),linear-gradient(to bottom,rgba(0,0,0,.2),transparent 22%)}
 .hero .ph img{object-position:50% 24%}
-.intro{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--pad);padding:clamp(70px,10vw,150px) var(--pad) 0}
-.intro p{grid-column:4/12;margin:0;font:400 clamp(20px,2.3vw,36px)/1.15 "Times New Roman",Times,serif;letter-spacing:0}
-.intro b{font:600 1em "Inter Tight","Helvetica Neue",Helvetica,sans-serif;letter-spacing:-.04em}
-.intro sup{font-size:.5em;font-style:italic}
+.about{padding:clamp(70px,10vw,150px) var(--pad) clamp(60px,9vw,140px)}
+.about .lbl{margin:0 0 clamp(18px,2.4vw,36px);font-size:15px;font-weight:500}
+.about h2{margin:0;font-weight:600;font-size:clamp(32px,6.1vw,112px);line-height:.96;letter-spacing:-.045em;text-transform:uppercase}
+.ab-g,.ab-p{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--pad)}
+.ab-g{align-items:start;margin-top:clamp(50px,8vw,130px)}
+.ab-g figure{margin:0}.ab-g .ph{aspect-ratio:4/5}
+.ab1{grid-column:1/5}.ab2{grid-column:5/9;margin-top:clamp(60px,12vw,200px)!important}.ab3{grid-column:9/13}
+.ab-p{margin-top:clamp(36px,5vw,80px)}
+.ab-p p{margin:0;font-size:clamp(15px,1.25vw,18px);line-height:1.4}
+.ab-p p:nth-child(1){grid-column:1/5}.ab-p p:nth-child(2){grid-column:5/9}.ab-p p:nth-child(3){grid-column:9/13}
+.ab-p span{display:block;margin-bottom:8px;font-size:12px;color:var(--mute)}
 .mf{margin:0;padding:clamp(50px,9vw,140px) var(--pad) clamp(80px,12vw,200px);font-weight:600;font-size:clamp(38px,8.2vw,150px);line-height:.92;letter-spacing:-.055em}
 .mf span{opacity:.14}
 .lb{height:430vh;position:relative}
 .stick{position:sticky;top:0;height:100svh;overflow:hidden;display:flex;align-items:center}
 .track{display:flex;align-items:flex-end;gap:var(--pad);padding:0 var(--pad);will-change:transform}
-.lbt{flex:none;margin:0 6vw 0 0;font-weight:600;font-size:clamp(90px,19vw,330px);line-height:.8;letter-spacing:-.07em}
+.lbt{flex:none;margin:0 6vw 0 0;font-weight:600;font-size:clamp(90px,19vw,330px);line-height:.8;letter-spacing:-.05em;text-transform:uppercase}
 .lbt small{display:block;margin-bottom:18px;font-size:16px;font-weight:400;letter-spacing:0;line-height:1.2}
 .slide{flex:none;margin:0}
 .slide .ph{height:calc(78svh - 22px);aspect-ratio:4/5}
@@ -59,16 +68,30 @@ a:focus-visible{outline:2px solid currentColor;outline-offset:3px}
 #pv.on{opacity:1;scale:1}
 .shop{padding:clamp(80px,12vw,200px) var(--pad) clamp(70px,10vw,150px)}
 .shop header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:22px}
-.shop h2{margin:0;font-weight:600;font-size:clamp(36px,6vw,100px);letter-spacing:-.06em;line-height:.9}
+.shop h2{margin:0;font-weight:600;font-size:clamp(36px,6vw,100px);letter-spacing:-.04em;line-height:.9;text-transform:uppercase}
 .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--pad);row-gap:clamp(30px,4vw,60px)}
 .card{display:block}
 .card .ph{aspect-ratio:4/5;background-color:#f6f6f6}
 .card:hover .ph img.b{opacity:1}
 .cm{display:flex;justify-content:space-between;gap:10px;padding-top:10px;font-size:15px;font-weight:500;line-height:1.2}
 .cm span{display:block;color:var(--mute);font-weight:400}
-.sz{opacity:0;transition:opacity .3s;white-space:nowrap}
-.card:hover .sz{opacity:1}
-.mq{overflow:hidden;white-space:nowrap;border-top:1px solid var(--line);padding:clamp(14px,2vw,30px) 0}
+.pl{display:block;position:relative}
+.badge{position:absolute;left:10px;top:10px;z-index:2;padding:4px 7px;background:#fff;color:var(--ink);font-size:12px;font-weight:500;line-height:1}
+.pr b{color:var(--ink);font-weight:500}
+.pr s{margin-left:6px;color:var(--mute);font-weight:400}
+.buy{margin-top:12px;opacity:0;transform:translateY(-4px);transition:opacity .25s,transform .25s;pointer-events:none}
+.card:hover .buy,.card:focus-within .buy,.card.has .buy{opacity:1;transform:none;pointer-events:auto}
+.sz{display:flex;gap:6px}
+.sz button,.add{font:500 13px/1 "Inter Tight","Helvetica Neue",Helvetica,Arial,sans-serif;letter-spacing:0;cursor:pointer}
+.sz button{flex:1;height:34px;padding:0;border:1px solid var(--line);background:#fff;color:var(--ink);transition:background .15s,color .15s,border-color .15s}
+.sz button:hover:not(:disabled){border-color:var(--ink)}
+.sz button.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.sz button:disabled{color:var(--mute);text-decoration:line-through;cursor:not-allowed;background:#fafafa}
+.add{display:block;width:100%;height:38px;margin-top:6px;padding:0;border:1px solid var(--ink);background:var(--ink);color:#fff;transition:background .15s,color .15s}
+.add:disabled{background:#fff;border-color:var(--line);color:var(--mute);cursor:default}
+.add.ok{background:#fff;color:var(--ink)}
+.sz button:focus-visible,.add:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.mq{overflow:hidden;white-space:nowrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:clamp(14px,2vw,30px) 0}
 .mt{display:inline-block;will-change:transform;font-weight:600;font-size:clamp(70px,14vw,260px);line-height:1;letter-spacing:-.065em}
 #cur{position:fixed;left:0;top:0;z-index:40;pointer-events:none;color:#fff;mix-blend-mode:difference;font-size:14px;font-weight:500;opacity:0;transition:opacity .2s;white-space:nowrap}
 #cur.on{opacity:1}
@@ -78,9 +101,9 @@ footer svg{display:block;width:100%;height:auto;fill:var(--ink)}
 .fm a{display:block;border-bottom:1px solid var(--line);padding:3px 0}
 .fm p{margin:0}
 .fm .m{color:var(--mute)}
-@media (max-width:900px){.cards{grid-template-columns:repeat(2,1fr)}.fm{grid-template-columns:1fr 1fr}.intro p{grid-column:1/13}.sp1{grid-column:1/9}.sp2{grid-column:5/13}.row small{display:none}}
+@media (max-width:900px){.cards{grid-template-columns:repeat(2,1fr)}.fm{grid-template-columns:1fr 1fr}.ab1{grid-column:1/7}.ab2{grid-column:7/13}.ab3{grid-column:1/7}.ab-p p:nth-child(n){grid-column:1/13}.ab-p{row-gap:22px}.sp1{grid-column:1/9}.sp2{grid-column:5/13}.row small{display:none}}
 @media (max-width:700px){.nav{padding-left:calc(var(--pad) + 96px)}.nav a:nth-child(n+2):not(:last-child){display:none}}
-@media (hover:none){.sz{opacity:1}}
+@media (hover:none){.buy{opacity:1;transform:none;pointer-events:auto}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.ph img.b{transition:none}}
 </style>
 </head>
@@ -88,12 +111,25 @@ footer svg{display:block;width:100%;height:auto;fill:var(--ink)}
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="m" viewBox="0 0 907 212"><path d="M65.3443 80.593L61.4948 97.7492C76.0453 82.318 88.2232 76.8867 106.042 76.8867C125.629 76.8867 136.039 82.5977 144.658 98.8914C159.814 82.8774 174.364 76.8867 193.951 76.8867C220.679 76.8867 237.021 91.4788 237.021 114.043C237.021 119.777 236.731 125.208 234.649 141.199L225.739 208.402H177.028L185.041 146.071C185.622 141.199 186.228 134.905 186.228 132.621C186.228 122.318 179.981 116.024 169.885 116.024C154.149 116.024 147.612 124.323 144.634 147.493L136.911 208.402H87.9085L96.5275 141.782C97.1085 137.213 97.4233 133.787 97.4233 130.919C97.4233 121.782 91.4917 116.048 81.3959 116.048C67.1359 116.048 59.4127 126.071 56.7495 147.516L49.0264 208.425H0L16.3421 80.593H65.3443Z"/><path d="M284.513 154.048C284.513 158.617 284.513 169.783 291.34 175.773C293.713 178.058 298.458 180.645 306.472 180.645C310.636 180.645 315.091 179.783 318.941 177.219C322.79 174.655 324.582 171.508 325.477 168.641H378.934C375.666 178.081 370.34 186.076 364.384 191.787C347.461 208.664 322.524 212.09 306.763 212.09C278.848 212.09 263.402 201.787 255.969 195.214C247.35 187.219 237.859 172.906 237.859 150.039C237.859 125.447 248.27 107.708 259.552 97.1487C271.125 86.2863 289.258 76.8457 316.277 76.8457C341.214 76.8457 356.975 85.4238 366.466 94.5613C380.121 107.708 384.285 126.589 384.285 143.163C384.285 146.869 383.994 150.599 383.68 154.025H284.489L284.513 154.048ZM334.121 127.452C333.83 121.438 331.143 115.727 327.293 112.3C323.734 109.153 318.384 107.149 311.847 107.149C305.019 107.149 298.773 109.736 294.924 113.442C291.074 117.149 288.677 122.883 287.806 127.452H334.145H334.121Z"/><path d="M504.271 85.7483L499.235 125.492C489.72 117.194 482.603 114.047 472.216 114.047C453.792 114.047 440.718 128.056 440.718 147.497C440.718 164.373 451.129 174.932 468.052 174.932C476.962 174.932 483.498 172.648 494.175 165.212L489.139 205.259C472.216 210.69 465.389 212.112 454.083 212.112C416.968 212.112 390.82 185.818 390.82 148.639C390.82 107.194 421.713 76.8672 464.178 76.8672C478.729 76.8672 491.488 79.711 504.271 85.725V85.7483Z"/><path d="M577.333 -0.0410156L565.446 92.0103C582.078 80.8681 593.36 76.8588 609.097 76.8588C637.012 76.8588 652.144 92.8727 652.144 122.034C652.144 127.465 651.538 134.318 650.352 143.199L642.048 208.397H593.046L599.583 157.208C601.374 144.341 601.665 141.194 601.665 136.323C601.665 122.593 596.024 116.02 583.846 116.02C568.109 116.02 561.257 124.318 558.303 147.768L550.58 208.374H501.578L528.331 -0.0410156L577.333 -0.0410156Z"/><path d="M723.729 116.9L711.866 208.392H663.154L674.727 116.9H653.93L658.384 80.5827H679.472L684.532 38.5547H733.534L728.183 80.5827H754.331L749.876 116.9H723.729Z"/><path d="M907.003 80.5753L890.661 208.384H841.659L845.218 194.375C830.062 207.522 818.489 212.09 800.065 212.09C766.509 212.09 744.816 188.641 744.816 151.764C744.816 108.594 774.523 76.8457 814.615 76.8457C833.33 76.8457 843.426 81.1347 857.686 95.1441L857.977 80.552H906.979L907.003 80.5753ZM852.36 140.622C852.36 124.328 842.264 114.025 826.236 114.025C808.417 114.025 794.763 128.897 794.763 148.338C794.763 164.631 805.149 175.214 821.491 175.214C839.31 175.214 852.384 160.622 852.384 140.622H852.36Z"/></symbol></svg>
 
 <a class="brand" href="#top" aria-label="mechta"><svg viewBox="0 0 907 212" role="img" aria-label="mechta"><use href="#m"/></svg></a>
-<nav class="nav"><a href="#shop">Магазин</a><a href="#lookbook">Lookbook</a><a href="#mf">Манифест</a><a href="#index">Индекс</a><a href="https://mechtastore.by">Корзина (0)</a></nav>
+<nav class="nav"><a href="#shop">Магазин</a><a href="#lookbook">Lookbook</a><a href="#mf">Манифест</a><a href="#index">Индекс</a><a href="https://mechtastore.by" id="cart">Корзина (0)</a></nav>
 
 <main>
 <section class="hero"><div class="ph" id="hp" data-i="2" data-l="Hero — фото 16:9" data-alt="Девушка в молочном анораке mechta"></div></section>
 
-<section class="intro"><p><b>Mechta</b> — уличная одежда из Гродно<sup>(BY)</sup>. Мы делаем <sup>(1)</sup>худи, <sup>(2)</sup>верхнюю одежду и <sup>(3)</sup>футболки: оверсайз, плотные, с потёртостями там, где они нужны. Спасибо, Thank you, Dziękuję, Дзякуй.</p></section>
+<div class="mq" aria-hidden="true"><div class="mt"><span>A dream without action is just aesthetic. Crafted with care. © Mechta. </span><span>A dream without action is just aesthetic. Crafted with care. © Mechta. </span></div></div>
+
+<section class="about" id="about"><p class="lbl">(О нас)</p>
+<h2>MECHTA — одежда для обычных дней, из которых складываются необычные истории.</h2>
+<div class="ab-g">
+<figure class="ab1"><div class="ph" data-s=".05" data-i="5" data-l="Фото" data-alt="Красная ветровка mechta"></div></figure>
+<figure class="ab2"><div class="ph" data-s="-.05" data-i="4" data-l="Фото" data-alt="Голубой бомбер mechta"></div></figure>
+<figure class="ab3"><div class="ph" data-s=".04" data-i="7" data-l="Фото" data-alt="Розовое худи mechta"></div></figure>
+</div>
+<div class="ab-p">
+<p><span>(01)</span>Нас вдохновляют не громкие достижения, а путь к ним: новые идеи, первые шаги, смелые решения и желание двигаться дальше, даже когда результат ещё неизвестен.</p>
+<p><span>(02)</span>Мы создаём вещи для повседневной жизни: для работы, встреч, путешествий, новых начинаний и всего, что происходит между ними.</p>
+<p><span>(03)</span>MECHTA — от слова «мечта». Мы верим, что каждая большая история начинается с простой мысли: всё может быть немного иначе и немного лучше.</p>
+</div></section>
 
 <h2 class="mf" id="mf">Мечта без действия — просто эстетика. A dream without action is just aesthetic. Сделано с заботой.</h2>
 
@@ -125,17 +161,17 @@ footer svg{display:block;width:100%;height:auto;fill:var(--ink)}
 
 <section class="shop" id="shop"><header><h2>Магазин</h2><a href="https://mechtastore.by" class="serif">mechtastore.by ↗</a></header>
 <div class="cards">
-<a class="card" data-cur="Смотреть" href="https://mechtastore.by"><div class="ph" data-i="1" data-j="3" data-l="Товар" data-alt="Футболка"></div><div class="cm"><div>Tee “No Message”<span>— BYN</span></div><div class="sz">S M L XL</div></div></a>
-<a class="card" data-cur="Смотреть" href="https://mechtastore.by"><div class="ph" data-i="2" data-j="5" data-l="Товар" data-alt="Анорак"></div><div class="cm"><div>Anorak “Cream”<span>— BYN</span></div><div class="sz">S M L XL</div></div></a>
-<a class="card" data-cur="Смотреть" href="https://mechtastore.by"><div class="ph" data-i="3" data-j="1" data-l="Товар" data-alt="Бомбер чёрный"></div><div class="cm"><div>Bomber “Black”<span>— BYN</span></div><div class="sz">S M L XL</div></div></a>
-<a class="card" data-cur="Смотреть" href="https://mechtastore.by"><div class="ph" data-i="4" data-j="2" data-l="Товар" data-alt="Бомбер голубой"></div><div class="cm"><div>Bomber “Dusty Blue”<span>— BYN</span></div><div class="sz">S M L XL</div></div></a>
-<a class="card" data-cur="Смотреть" href="https://mechtastore.by"><div class="ph" data-i="5" data-j="2" data-l="Товар" data-alt="Ветровка"></div><div class="cm"><div>Windbreaker “Red”<span>— BYN</span></div><div class="sz">S M L XL</div></div></a>
-<a class="card" data-cur="Смотреть" href="https://mechtastore.by"><div class="ph" data-i="6" data-j="7" data-l="Товар" data-alt="Худи тёмно-синее"></div><div class="cm"><div>Hoodie “Navy”<span>— BYN</span></div><div class="sz">S M L XL</div></div></a>
-<a class="card" data-cur="Смотреть" href="https://mechtastore.by"><div class="ph" data-i="7" data-j="6" data-l="Товар" data-alt="Худи розовое"></div><div class="cm"><div>Hoodie “Pink”<span>— BYN</span></div><div class="sz">S M L XL</div></div></a>
-<a class="card" data-cur="Смотреть" href="https://mechtastore.by"><div class="ph" data-i="0" data-l="Товар — загрузить фото"></div><div class="cm"><div>Название товара<span>— BYN</span></div><div class="sz">S M L XL</div></div></a>
+<article class="card"><a class="pl" data-cur="Смотреть" href="https://mechtastore.by"><span class="badge">−10%</span><div class="ph" data-i="1" data-j="3" data-l="Товар" data-alt="Футболка"></div></a><div class="cm"><a href="https://mechtastore.by"><div>Tee “No Message”</div><span class="pr"><b>144 BYN</b> <s>160 BYN</s></span></a></div><div class="buy"><div class="sz" role="group" aria-label="Размер"><button type="button" data-s="S" aria-pressed="false">S</button><button type="button" data-s="M" aria-pressed="false">M</button><button type="button" data-s="L" aria-pressed="false">L</button><button type="button" data-s="XL" aria-pressed="false">XL</button></div><button type="button" class="add" disabled>Выберите размер</button></div></article>
+<article class="card"><a class="pl" data-cur="Смотреть" href="https://mechtastore.by"><span class="badge">−30%</span><div class="ph" data-i="2" data-j="5" data-l="Товар" data-alt="Анорак"></div></a><div class="cm"><a href="https://mechtastore.by"><div>Anorak “Cream”</div><span class="pr"><b>161 BYN</b> <s>230 BYN</s></span></a></div><div class="buy"><div class="sz" role="group" aria-label="Размер"><button type="button" data-s="S" aria-pressed="false">S</button><button type="button" data-s="M" aria-pressed="false">M</button><button type="button" data-s="L" aria-pressed="false">L</button><button type="button" data-s="XL" aria-pressed="false">XL</button></div><button type="button" class="add" disabled>Выберите размер</button></div></article>
+<article class="card"><a class="pl" data-cur="Смотреть" href="https://mechtastore.by"><div class="ph" data-i="3" data-j="1" data-l="Товар" data-alt="Бомбер чёрный"></div></a><div class="cm"><a href="https://mechtastore.by"><div>Bomber “Black”</div><span class="pr"><b>430 BYN</b></span></a></div><div class="buy"><div class="sz" role="group" aria-label="Размер"><button type="button" data-s="S" aria-pressed="false">S</button><button type="button" data-s="M" aria-pressed="false">M</button><button type="button" data-s="L" aria-pressed="false">L</button><button type="button" data-s="XL" aria-pressed="false" disabled>XL</button></div><button type="button" class="add" disabled>Выберите размер</button></div></article>
+<article class="card"><a class="pl" data-cur="Смотреть" href="https://mechtastore.by"><div class="ph" data-i="4" data-j="2" data-l="Товар" data-alt="Бомбер голубой"></div></a><div class="cm"><a href="https://mechtastore.by"><div>Bomber “Dusty Blue”</div><span class="pr"><b>430 BYN</b></span></a></div><div class="buy"><div class="sz" role="group" aria-label="Размер"><button type="button" data-s="S" aria-pressed="false">S</button><button type="button" data-s="M" aria-pressed="false">M</button><button type="button" data-s="L" aria-pressed="false">L</button><button type="button" data-s="XL" aria-pressed="false">XL</button></div><button type="button" class="add" disabled>Выберите размер</button></div></article>
+<article class="card"><a class="pl" data-cur="Смотреть" href="https://mechtastore.by"><span class="badge">−30%</span><div class="ph" data-i="5" data-j="2" data-l="Товар" data-alt="Ветровка"></div></a><div class="cm"><a href="https://mechtastore.by"><div>Windbreaker “Red”</div><span class="pr"><b>189 BYN</b> <s>270 BYN</s></span></a></div><div class="buy"><div class="sz" role="group" aria-label="Размер"><button type="button" data-s="S" aria-pressed="false" disabled>S</button><button type="button" data-s="M" aria-pressed="false">M</button><button type="button" data-s="L" aria-pressed="false">L</button><button type="button" data-s="XL" aria-pressed="false">XL</button></div><button type="button" class="add" disabled>Выберите размер</button></div></article>
+<article class="card"><a class="pl" data-cur="Смотреть" href="https://mechtastore.by"><div class="ph" data-i="6" data-j="7" data-l="Товар" data-alt="Худи тёмно-синее"></div></a><div class="cm"><a href="https://mechtastore.by"><div>Hoodie “Navy”</div><span class="pr"><b>190 BYN</b></span></a></div><div class="buy"><div class="sz" role="group" aria-label="Размер"><button type="button" data-s="S" aria-pressed="false">S</button><button type="button" data-s="M" aria-pressed="false">M</button><button type="button" data-s="L" aria-pressed="false">L</button><button type="button" data-s="XL" aria-pressed="false">XL</button></div><button type="button" class="add" disabled>Выберите размер</button></div></article>
+<article class="card"><a class="pl" data-cur="Смотреть" href="https://mechtastore.by"><div class="ph" data-i="7" data-j="6" data-l="Товар" data-alt="Худи розовое"></div></a><div class="cm"><a href="https://mechtastore.by"><div>Hoodie “Pink”</div><span class="pr"><b>190 BYN</b></span></a></div><div class="buy"><div class="sz" role="group" aria-label="Размер"><button type="button" data-s="S" aria-pressed="false">S</button><button type="button" data-s="M" aria-pressed="false">M</button><button type="button" data-s="L" aria-pressed="false" disabled>L</button><button type="button" data-s="XL" aria-pressed="false">XL</button></div><button type="button" class="add" disabled>Выберите размер</button></div></article>
+<article class="card"><a class="pl" data-cur="Смотреть" href="https://mechtastore.by"><div class="ph" data-i="0" data-l="Товар — загрузить фото"></div></a><div class="cm"><a href="https://mechtastore.by"><div>Название товара</div><span class="pr"><b>— BYN</b></span></a></div><div class="buy"><div class="sz" role="group" aria-label="Размер"><button type="button" data-s="S" aria-pressed="false">S</button><button type="button" data-s="M" aria-pressed="false">M</button><button type="button" data-s="L" aria-pressed="false">L</button><button type="button" data-s="XL" aria-pressed="false">XL</button></div><button type="button" class="add" disabled>Выберите размер</button></div></article>
 </div></section>
 
-<div class="mq" aria-hidden="true"><div class="mt"><span>A dream without action is just aesthetic. Crafted with care. © Mechta. </span><span>A dream without action is just aesthetic. Crafted with care. © Mechta. </span></div></div>
+
 </main>
 <div id="cur"></div>
 
@@ -160,7 +196,7 @@ $$('.ph').forEach(el=>{
   add(el.dataset.j,'b');
 });
 const mf=$('#mf');mf.innerHTML=mf.textContent.trim().split(/\s+/).map(w=>'<span>'+w+'</span>').join(' ');
-const words=$$('#mf span'),br=$('.brand'),bs=$('svg',br),hp=$('#hp'),lb=$('.lb'),tr=$('.track'),cnt=$('.cnt'),pv=$('#pv'),cur=$('#cur'),mt=$('.mt'),slides=$$('.slide').length;
+const words=$$('#mf span'),br=$('.brand'),bs=$('svg',br),hp=$('#hp'),hero=$('.hero'),lb=$('.lb'),tr=$('.track'),cnt=$('.cnt'),pv=$('#pv'),cur=$('#cur'),mt=$('.mt'),slides=$$('.slide').length;
 let mx=-200,my=-200,px=0,py=0,cx=0,cy=0,xo=0,vel=0,last=scrollY;
 if(FINE)addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY});
 $$('.row').forEach(r=>{
@@ -171,11 +207,22 @@ $$('[data-cur]').forEach(c=>{
   c.onmouseenter=()=>{cur.textContent=c.dataset.cur;cur.classList.add('on')};
   c.onmouseleave=()=>cur.classList.remove('on');
 });
+const nbs=document.createElement('span');nbs.style.cssText='display:inline-block;width:0;height:0';$('.nav a').appendChild(nbs);
+let nb=0;const meas=()=>{nb=nbs.getBoundingClientRect().bottom};meas();addEventListener('resize',meas);if(document.fonts)document.fonts.ready.then(meas);
+const cartEl=$('#cart');let cartN=0;
+$$('.card').forEach(c=>{
+  const bs=$$('.sz button',c),add=$('.add',c);let size='',t;
+  const sync=()=>{bs.forEach(b=>{const on=b.dataset.s===size;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on)});add.disabled=!size;add.textContent=size?'В корзину · '+size:'Выберите размер';c.classList.toggle('has',!!size)};
+  bs.forEach(b=>b.onclick=()=>{size=size===b.dataset.s?'':b.dataset.s;sync()});
+  add.onclick=()=>{if(!size)return;cartN++;cartEl.textContent='Корзина ('+cartN+')';add.classList.add('ok');add.textContent='Добавлено ✓';clearTimeout(t);t=setTimeout(()=>{add.classList.remove('ok');size='';sync()},1400)};
+});
 function frame(){
   const y=scrollY,vw=innerWidth,vh=innerHeight;
   const pd=cl(vw*.016,14,24),w1=vw<700?72:92,w0=vw-2*pd,p=cl(y/(vh*.7)),e=p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;
-  bs.style.width=lerp(w0,w1,e)+'px';
-  br.style.transform='translate3d(0,'+lerp(vh-w0*212/907-pd,pd+2,e)+'px,0)';
+  document.body.classList.toggle('lt',hero.getBoundingClientRect().bottom<pd+34);
+  const bw=lerp(w0,w1,e),bh=bw*212/907,fy=nb-w1*212/907*.983,lim=Math.max(hero.getBoundingClientRect().bottom-bh-pd,fy);
+  bs.style.width=bw+'px';
+  br.style.transform='translate3d(0,'+Math.min(lerp(vh-w0*212/907-pd,fy,e),lim)+'px,0)';
   if(y<vh*1.2)hp.style.transform='translate3d(0,'+y*.2+'px,0)';
   words.forEach(w=>{w.style.opacity=.14+.86*cl((vh*.82-w.getBoundingClientRect().top)/(vh*.3))});
   const lp=cl((y-lb.offsetTop)/(lb.offsetHeight-vh));
